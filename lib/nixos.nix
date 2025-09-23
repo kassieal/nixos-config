@@ -37,7 +37,7 @@ in rec {
       initialPassword =
         if !sops.enabled
 	then "${name}"
-	else null;
+	else "initialPassword";
       hashedPasswordFile =
         if sops.enabled
 	then sops.paths."${name}"
