@@ -3,8 +3,6 @@
   pkgs,
   ...
 }: {
-  users.users.kassie.initialPassword = "initialPassword";
-
   modules = {
     desktop = {
       services = {
