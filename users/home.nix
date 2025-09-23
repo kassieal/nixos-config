@@ -1,4 +1,3 @@
-# default home-manager config per machine
 { lib, ... }: let
   inherit (lib) mkDefault;
 in {
