@@ -1,6 +1,6 @@
 { lib, inputs, ... }: let
   inherit (lib) pathExists hasSuffix filterAttrs mapAttrsToList concatLists;
-  inherit (builtin) readDir;
+  inherit (builtins) readDir;
 
   is-module = path: name: type:
     (type == "directory" && pathExists "${path}/${name}/default.nix")
