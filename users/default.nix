@@ -48,21 +48,18 @@ in {
   config = {
     users = {
       mutableUsers = false;
-
-      users = {
-        mk-users config.modules.userDefaults.extraGroups cfg;
-
-        home-manager = let
-          module-paths = klib.all-modules-in-dir-rec "${inputs.self.outPath}/modules/home-manager";
-        in {
-          extraSpecialArgs = {
-            inherit inputs klib;
-          };
-
-          users = mk-homes module-paths ./home.nix cfg;
-          backupFileExtension = "backup";
-        };
+      users = mk-users config.modules.userDefaults.extraGroups cfg;
+    };
+    
+    home-manager = let
+      module-paths = klib.all-modules-in-dir-rec "${inputs.self.outPath}/modules/home-manager";
+    in {
+      extraSpecialArgs = {
+        inherit inputs klib;
       };
+
+      users = mk-homes module-paths ./home.nix cfg;
+      backupFileExtension = "backup";
     };
   };
 }
