@@ -3,4 +3,4 @@
 
   modules = import ./modules.nix { inherit lib inputs; };
 in
-  foldl' (a: b: a // b) {} (map (module: import module { inherit lib inputs; }) (modules.all-in-dir ./.))
+  foldl' (a: b: a // b) {} (map (module: import module { inherit lib inputs; }) (modules.all-modules-in-dir ./.))
