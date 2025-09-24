@@ -40,8 +40,8 @@ in rec {
       extraGroups =
       (
         if user.privileged
-	then [ "wheel" ]
-	else []
+		then [ "wheel" ]
+		else []
       )
       ++ extra-groups
       ++ user.extra-groups;
@@ -49,5 +49,5 @@ in rec {
   };
 
   # mk-users :: List[UserConfig] -> NixosUserAttrSet (List[AttrSet] -> AttrSet)
-  mk-users = extra-groups: users: listToAttrs (map (mk-user extra-groups sops) users);
+  mk-users = extra-groups: users: listToAttrs (map (mk-user extra-groups) users);
 }
