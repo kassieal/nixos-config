@@ -28,33 +28,26 @@ in rec {
   mk-hosts = special-args: modules: path: listToAttrs (map-modules (mk-host special-args modules path) path);
 
   # mk-user :: UserConfig -> NixosUser
-  mk-user = extra-groups: sops: user: let
+  mk-user = extra-groups: user: let
     name = user.name;
   in {
     name = name;
     value = {
       home = mkDefault "/home/${name}";
-      initialPassword =
-        if !sops.enabled
-	then "${name}"
-	else "initialPassword";
-      hashedPasswordFile =
-        if sops.enabled
-	then sops.paths."${name}"
-	else null;
+      initialPassword = "initialPassword";
       isNormalUser = true;
       createHome = true;
       extraGroups =
-      {
+      (
         if user.privileged
 	then [ "wheel" ]
 	else []
-      }
+      )
       ++ extra-groups
       ++ user.extra-groups;
     };
   };
 
   # mk-users :: List[UserConfig] -> NixosUserAttrSet (List[AttrSet] -> AttrSet)
-  mk-users = extra-groups: sops: users: listToAttrs (map (mk-user extra-groups sops) users);
+  mk-users = extra-groups: users: listToAttrs (map (mk-user extra-groups sops) users);
 }
