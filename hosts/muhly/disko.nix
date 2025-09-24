@@ -26,7 +26,7 @@
               label = "NIXLUKS";
               content = {
                 type = "luks";
-                name = "cryptid";
+                name = "rotulus";
                 extraOpenArgs = [
                   "--perf-no_read_workqueue"
                   "--perf-no_write_workqueue"
