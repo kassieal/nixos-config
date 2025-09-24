@@ -12,7 +12,7 @@
   cfg = config.modules.desktop.services.impermanence;
 in {
   imports = [
-    inputs.impermanence.nixosModules.home-manager.impermanence;
+    inputs.impermanence.nixosModules.home-manager.impermanence
   ];
 
   options.modules.desktop.services.impermanence = {
