@@ -6,7 +6,7 @@
   modules = {
     desktop = {
       services = {
-        impermanence.enable = true;
+        # impermanence.enable = true;
       };
     };
   };
