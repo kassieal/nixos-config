@@ -12,17 +12,22 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix.url = "github:Mic92/sops-nix";
   };
 
-  outputs = inputs @ { self, nixpkgs, ... }: let
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    ...
+  }: let
     lib = nixpkgs.lib;
-    klib = import ./lib { inherit lib inputs; };
+    klib = import ./lib {inherit lib inputs;};
     module-paths = klib.all-modules-in-dir-rec ./modules/nixos;
   in {
     lib = lib;
     klib = klib;
 
     nixosConfigurations =
-      klib.mk-hosts { inherit inputs klib; } module-paths ./hosts;
+      klib.mk-hosts {inherit inputs klib;} module-paths ./hosts;
   };
 }

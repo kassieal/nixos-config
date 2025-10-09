@@ -1,7 +1,5 @@
-{ pkgs, config, lib, inputs, self, ... }: {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+{ inputs, ... }: {
+  imports = [ ./hardware-configuration.nix ];
 
   modules = {
     system = {
@@ -19,16 +17,14 @@
     };
 
     services = {
-      # sops.enable = true;
+      sops.enable = true;
       ssh.enable = true;
     };
 
-    users = [
-      {
-        name = "kassie";
-        privileged = true;
-        config = "${inputs.self.outPath}/users/kassie";
-      }
-    ];
+    users = [{
+      name = "kassie";
+      privileged = true;
+      config = "${inputs.self.outPath}/users/kassie";
+    }];
   };
 }

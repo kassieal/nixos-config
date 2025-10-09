@@ -45,24 +45,41 @@ in {
     };
   };
 
-  config = {
-    users = {
-      mutableUsers = false;
-
-      users = {
-        mk-users config.modules.userDefaults.extraGroups cfg;
-
-        home-manager = let
-          module-paths = klib.all-modules-in-dir-rec "${inputs.self.outPath}/modules/home-manager";
-        in {
-          extraSpecialArgs = {
-            inherit inputs klib;
-          };
-
-          users = mk-homes module-paths ./home.nix cfg;
-          backupFileExtension = "backup";
+  config = mkMerge [
+    {
+      users.mutableUsers = false;
+      users.users = let
+        sops = {
+          enabled = config.modules.services.sops.enable;
+          paths = listToAttrs (map (user: {
+              name = user.name;
+              value = config.sops.secrets."passwords/${user.name}".path;
+            })
+            cfg);
         };
+      in
+        mk-users config.modules.userDefaults.extraGroups sops cfg;
+
+      home-manager = let
+        module-paths = klib.all-modules-in-dir-rec "${inputs.self.outPath}/modules/home-manager";
+      in {
+        extraSpecialArgs = {
+          inherit inputs klib;
+        };
+        users = mk-homes module-paths ./home.nix cfg;
+        backupFileExtension = "backup";
       };
-    };
-  };
+    }
+    (
+      mkIf config.modules.services.sops.enable {
+        sops.secrets = listToAttrs (map (user: {
+            name = "passwords/${user.name}";
+            value = {
+              neededForUsers = true;
+            };
+          })
+          cfg);
+      }
+    )
+  ];
 }
