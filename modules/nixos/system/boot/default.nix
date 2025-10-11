@@ -1,9 +1,9 @@
 { config, lib, kalib, ... }: let
   inherit (builtins) foldl';
   inherit (lib) length filter;
-  inherit (kalib) attrs-to-list;
+  inherit (klib) attrs-to-list;
 
-  bootloaders = attrs-to-list config.kra.system.boot;
+  bootloaders = attrs-to-list config.modules.system.boot;
   enabled-bootloaders = filter (bl: bl.value.enable) bootloaders;
   enabled-bootloaders-names = foldl' (s: bl: "${bl.name} ${s}") "" enabled-bootloaders;
 in {
