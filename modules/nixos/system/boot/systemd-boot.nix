@@ -15,7 +15,7 @@ in {
 
   config = mkIf cfg.enable {
     boot = {
-      initrd.systemd.enable mkDefault true;
+      initrd.systemd.enable = mkDefault true;
 
       loader = {
         systemd-boot = {
