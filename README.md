@@ -34,6 +34,6 @@ cd /mnt/persist/etc/nixos/nixos-config
 ```
 
 Install with Flake
-```bash
+```
 sudo nixos-install --flake .#<host-name> --root /mnt
 ```
