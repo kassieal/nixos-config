@@ -59,7 +59,7 @@
                       mountOptions = [ "subvol=persist" "compress=zstd" "noatime" ];
                     };
                     "/log" = {
-                      mountpoint = "/log";
+                      mountpoint = "/var/log";
                       mountOptions = [ "subvol=log" "compress=zstd" "noatime" ];
                     };
                     "/swap" = {
