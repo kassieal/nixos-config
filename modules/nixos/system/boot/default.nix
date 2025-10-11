@@ -1,4 +1,4 @@
-{ config, lib, kalib, ... }: let
+{ config, lib, klib, ... }: let
   inherit (builtins) foldl';
   inherit (lib) length filter;
   inherit (klib) attrs-to-list;
