@@ -15,7 +15,7 @@ sudo nix --experimental-features "nix-command flakes" run github:nix-community/d
 
 Generate the Hardware Configuration File:
 ```bash
-sudo nixos-generate-config --no-filesystem --root /mnt
+sudo nixos-generate-config --no-filesystems --root /mnt
 ```
 
 Copy Hardware Configuration into Repository:
