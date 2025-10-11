@@ -20,7 +20,7 @@ sudo nixos-generate-config --no-filesystems --root /mnt
 
 Copy Hardware Configuration into Repository:
 ```bash
-sudo cp /mnt/etc/nixos/hardware-config.nix nixos-config/hosts/<host-name>
+sudo cp /mnt/etc/nixos/hardware-configuration.nix hosts/<host-name>
 ```
 
 Copy Configuration to Filesystem:
