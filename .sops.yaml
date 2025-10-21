@@ -1,7 +1,11 @@
 keys:
-  - &user_kassie cc3287547ef4257ed6c715cbaa452a8d722ecd99
+  - &users:
+    - &kassie age14rvrnvfzq4akgmg68r5tglkvk98phzw76wr05hh0dalxnl645dpswchcjl 
+  - &hosts:
+    - &muhly <age_key>
 creation_rules:
   - path_regex: secrets/secrets.yaml$
     key_groups:
-    - pgp:
-      - *user_kassie
+    - age:
+      - *kassie
+      - *muhly
