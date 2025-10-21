@@ -1,7 +1,7 @@
 keys:
-  - &user_kassie age17wln9ykw7z65c0ysf525l5uuxl4snu72jcr64v7e4c6wa233n93q25xk4r
+  - &user_kassie cc3287547ef4257ed6c715cbaa452a8d722ecd99
 creation_rules:
   - path_regex: secrets/secrets.yaml$
     key_groups:
-    - age:
+    - pgp:
       - *user_kassie
