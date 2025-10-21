@@ -19,6 +19,7 @@
     services = {
       # sops.enable = true;
       ssh.enable = true;
+      gpg.enable = true;
     };
 
     users = [
